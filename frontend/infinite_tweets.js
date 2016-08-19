@@ -2,6 +2,7 @@ class InfiniteTweets {
   constructor() {
     this.maxCreatedAt = null;
     this.fetchTweets();
+    this.insertTweet();
   }
   fetchTweets(){
     let tweetConstructor = this;
@@ -34,6 +35,14 @@ class InfiniteTweets {
     tweets.forEach( function(tweet) {
       let tweetString = `<li>${JSON.stringify(tweet)}</li>`;
       $("#feed").append(tweetString);
+    });
+  }
+  insertTweet() {
+    let that = this;
+    $('#feed').on('insertTweet', function(event, tweet) {
+      let tweetList = `<li>${JSON.stringify(tweet)}</li>`;
+      $('#feed').prepend(tweetList);
+      that.maxCreatedAt = tweet.created_at;
     });
   }
 }

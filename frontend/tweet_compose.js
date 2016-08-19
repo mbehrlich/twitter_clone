@@ -36,12 +36,7 @@ class TweetCompose {
   }
   handleSuccess(tweet) {
     this.clearInput();
-    // ('#feed').append()
-    let div = this.el.attr('data-tweets-ul');
-    let tweetList = `<li>${JSON.stringify(tweet)}</li>`;
-    // console.log(div);
-    // console.log(tweetList);
-    $(div).prepend(tweetList);
+    $('#feed').trigger("insertTweet", [tweet]);
   }
   charsLeft(){
     $('textarea').on('input', function() {
